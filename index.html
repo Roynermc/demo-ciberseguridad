@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo de Ciberseguridad</title>
+</head>
+<body>
+  <h1>¡Ups! ¿Qué pasó al hacer clic?</h1>
+  <p>Estamos recopilando tu información...</p>
+
+  <div id="info"></div>
+
+  <script>
+    fetch('http://ip-api.com/json/')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('info').innerHTML += `
+          <p><strong>IP:</strong> ${data.query}</p>
+          <p><strong>Ubicación:</strong> ${data.city}, ${data.country}</p>
+          <p><strong>ISP:</strong> ${data.isp}</p>
+        `;
+      });
+
+    const userAgent = navigator.userAgent;
+    document.getElementById('info').innerHTML += `
+      <p><strong>Navegador / OS:</strong> ${userAgent}</p>
+    `;
+  </script>
+</body>
+</html>
